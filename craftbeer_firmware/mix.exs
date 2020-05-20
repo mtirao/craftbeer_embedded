@@ -61,6 +61,7 @@ defmodule CraftbeerFirmware.MixProject do
       {:nerves_system_bbb, "~> 2.6", runtime: false, targets: :bbb},
       {:nerves_system_x86_64, "~> 1.11", runtime: false, targets: :x86_64},
       {:craftbeer_ui, path: "../craftbeer_ui"},
+      {:circuits_i2c, "~> 0.1"},
     ]
   end
 

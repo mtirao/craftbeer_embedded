@@ -16,7 +16,6 @@ defmodule CraftbeerApiWeb.SensorController do
   def scan_sensors do
     File.ls!(@base_dir)
       |> Enum.filter(&(String.starts_with?(&1, "28-")))
-      |> Enum.each(&read_temp(&1, @base_dir))
 
   end
 
