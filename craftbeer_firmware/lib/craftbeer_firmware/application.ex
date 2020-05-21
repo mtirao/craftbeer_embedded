@@ -9,6 +9,9 @@ defmodule CraftbeerFirmware.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: CraftbeerFirmware.Supervisor]
+
+    config = Application.get_env(:craftbeer_firmware, :lcd)
+
     children =
       [
         # Children for all targets
@@ -39,4 +42,6 @@ defmodule CraftbeerFirmware.Application do
   def target() do
     Application.get_env(:craftbeer_firmware, :target)
   end
+
+
 end
