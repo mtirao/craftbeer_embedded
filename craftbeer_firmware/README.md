@@ -1,6 +1,6 @@
 # CraftbeerFirmware
 
-**TODO: Add description**
+This is the firmware implementation for the craftbeer hardware manager. Tested only on Raspberry, but it should work on any other hardarwe supported by Nerves.
 
 ## Targets
 
