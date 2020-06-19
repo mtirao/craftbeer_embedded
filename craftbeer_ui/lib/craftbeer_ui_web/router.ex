@@ -21,10 +21,12 @@ defmodule CraftbeerUiWeb.Router do
   end
 
   scope "/api", CraftbeerApiWeb do
-      pipe_through :browser
+      pipe_through :api
 
       get "/temperature", TemperatureController, :index
       get "/temperature/sensor", SensorController, :index
+
+      post "/gpio/channel", GpioController, :index
   end
 
   # Other scopes may use custom stacks.

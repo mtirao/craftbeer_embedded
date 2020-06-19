@@ -1,0 +1,3 @@
+export MIX_TARGET=rpi0   
+export NERVES_NETWORK_PSK=3172AppL
+export NERVES_NETWORK_SSID=Craftbeer
