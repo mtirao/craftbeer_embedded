@@ -10,13 +10,37 @@ defmodule CraftbeerFirmware.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: CraftbeerFirmware.Supervisor]
 
-    config = Application.get_env(:craftbeer_firmware, :lcd)
+    VintageNet.configure("wlan0", %{
+      type: VintageNetWiFi,
+      vintage_net_wifi: %{
+        networks: [
+          %{
+            key_mgmt: :wpa_psk,
+            psk: "0049252584",
+            ssid: "Fibertel WiFi834 2.4GHz"
+          }
+        ]
+      },
+      ipv4: %{method: :dhcp}
+    })
 
     children =
       [
         # Children for all targets
         # Starts a worker by calling: CraftbeerFirmware.Worker.start_link(arg)
         # {CraftbeerFirmware.Worker, arg},
+       # %{
+       #   id: CraftbeerFirmware.Board,
+       #   start: {CraftbeerFirmware.Board, :start_link, [[:hello]]}
+       # }
+       %{
+         id: CraftbeerFirmware.Board,
+         start: {CraftbeerFirmware.Board, :start_link, [[:hello, :world]]}
+       },
+       %{
+         id: CraftbeerFirmware.TemperatureReader,
+         start: {CraftbeerFirmware.TemperatureReader, :start_link, [[:hello, :world]]}
+       }
       ] ++ children(target())
 
     Supervisor.start_link(children, opts)

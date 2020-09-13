@@ -1,6 +1,8 @@
 defmodule CraftbeerUiWeb.Router do
   use CraftbeerUiWeb, :router
 
+  import Phoenix.LiveDashboard.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -18,13 +20,14 @@ defmodule CraftbeerUiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    live_dashboard "/dashboard", metrics: CraftbeerUiWeb.Telemetry
   end
 
   scope "/api", CraftbeerApiWeb do
       pipe_through :api
 
       get "/temperature", TemperatureController, :index
-      get "/temperature/sensor", SensorController, :index
+      get "/temperature/sensors", SensorController, :index
 
       post "/gpio/channel", GpioController, :index
   end
@@ -41,12 +44,12 @@ defmodule CraftbeerUiWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  #if Mix.env() in [:dev, :test] do
+  #  import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: CraftbeerUiWeb.Telemetry
-    end
-  end
+  #  scope "/" do
+  #    pipe_through :browser
+  #    live_dashboard "/dashboard", metrics: CraftbeerUiWeb.Telemetry
+  #  end
+  #end
 end

@@ -38,21 +38,27 @@ config :nerves_network,
 
 key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
 
-config :nerves_network, :default,
-  wlan0: [
-    networks: [
-      [
-        ssid: System.get_env("NERVES_NETWORK_SSID"),
-        psk: System.get_env("NERVES_NETWORK_PSK"),
-        key_mgmt: String.to_atom(key_mgmt),
-        scan_ssid: 1 #if your WiFi setup as hidden
-      ]
-    ]
-  ],
-  eth0: [
-    ipv4_address_method: :dhcp
+
+config :vintage_net,
+  config: [
+    {"wlan0",
+      %{
+        type: VintageNetWiFi,
+        vintage_net_wifi: %{
+          networks: [
+            %{
+              key_mgmt: :wpa_psk,
+              ssid: "Fibertel WiFi834 2.4GHz",
+              psk: "0049252584"
+            }
+          ]
+        },
+        ipv4: %{method: :dhcp},
+      }
+    }
   ]
 
+  
 config :nerves, :firmware,
 fwup_conf: "config/rpi/fwup.conf"
 

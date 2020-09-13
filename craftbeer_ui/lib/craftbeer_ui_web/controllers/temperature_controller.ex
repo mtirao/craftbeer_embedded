@@ -5,12 +5,12 @@ defmodule CraftbeerApiWeb.TemperatureController do
 
   require Logger
 
-  def index(conn, _params) do
+  def index(conn, %{"sensor" => sensor}) do
 
-    sensor_data = File.read!("/sys/bus/w1/devices/28-0317717417ff/w1_slave")
-    [_, temp] = Regex.run(~r/t=(\d+)/, sensor_data)
+   
+    celsius = GenServer.call(CraftbeerFirmware.TemperatureReader, {:temperature, sensor})
 
-    render(conn, "temperature.json", %{temperature: temp})
+    render(conn, "temperature.json", %{temperature: celsius})
   end
 
 

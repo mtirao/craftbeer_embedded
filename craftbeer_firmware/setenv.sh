@@ -1,3 +1,5 @@
-export MIX_TARGET=rpi0   
-export NERVES_NETWORK_PSK=3172AppL
-export NERVES_NETWORK_SSID=Craftbeer
+#$HOME/.kiex/elixirs/elixir-1.10.2.env
+export MIX_TARGET=rpi0
+export SECRET_KEY_BASE=z0xUcf7G8mtwjFZrbNf7omIBuJmjZW8EIjD3M0C052OY9HG+ZqmGU83KXZKtgHeH
+export NERVES_NETWORK_PSK=0049252584
+export "NERVES_NETWORK_SSID=Fibertel WiFi834 2.4GHz"

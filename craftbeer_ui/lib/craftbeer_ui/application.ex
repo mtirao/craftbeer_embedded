@@ -6,15 +6,19 @@ defmodule CraftbeerUi.Application do
   use Application
 
   def start(_type, _args) do
+
+
     children = [
       # Start the Telemetry supervisor
       CraftbeerUiWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: CraftbeerUi.PubSub},
       # Start the Endpoint (http/https)
-      CraftbeerUiWeb.Endpoint
+      CraftbeerUiWeb.Endpoint,
       # Start a worker by calling: CraftbeerUi.Worker.start_link(arg)
       # {CraftbeerUi.Worker, arg}
+      #CraftbeerUi.Board
+      
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
