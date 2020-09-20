@@ -17,7 +17,7 @@ defmodule CraftbeerFirmware.Application do
           %{
             key_mgmt: :wpa_psk,
             psk: "0049252584",
-            ssid: "Fibertel WiFi834 2.4GHz"
+            ssid: "Fibertel WiFi834 2.4GHz_EXT"
           }
         ]
       },

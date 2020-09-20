@@ -36,28 +36,6 @@ config :craftbeer_ui, CraftbeerUiWeb.Endpoint,
 config :nerves_network,
   regulatory_domain: "US"
 
-key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
-
-
-config :vintage_net,
-  config: [
-    {"wlan0",
-      %{
-        type: VintageNetWiFi,
-        vintage_net_wifi: %{
-          networks: [
-            %{
-              key_mgmt: :wpa_psk,
-              ssid: "Fibertel WiFi834 2.4GHz",
-              psk: "0049252584"
-            }
-          ]
-        },
-        ipv4: %{method: :dhcp},
-      }
-    }
-  ]
-
   
 config :nerves, :firmware,
 fwup_conf: "config/rpi/fwup.conf"

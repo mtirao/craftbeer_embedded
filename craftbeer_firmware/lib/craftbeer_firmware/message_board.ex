@@ -20,7 +20,7 @@ defmodule CraftbeerFirmware.Board do
     :timer.sleep(300)
 
     Display.writeLine(ref, 1, 'WELCOME')
-    Display.writeLine(ref, 2, 'CRAFTBEER v1.0.2')
+    Display.writeLine(ref, 2, 'CRAFTBEER v1.0.4')
 
     {:ok, ref}
   end
