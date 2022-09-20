@@ -8,7 +8,18 @@ import Config
 import_config "../../craftbeer_ui/config/config.exs"
 import_config "../../craftbeer_ui/config/prod.exs"
 
-config :craftbeer_firmware, target: Mix.target()
+config :craftbeer_ui, CraftbeerUiWeb.Endpoint,
+  code_reloader: false,
+  http: [port: 80],
+  load_from_system_env: false,
+  server: true,
+  url: [host: "nerves.local", port: 80]
+
+
+# Enable the Nerves integration with Mix
+Application.start(:nerves_bootstrap)
+
+config :hello_nerves, target: Mix.target()
 
 # Customize non-Elixir parts of the firmware. See
 # https://hexdocs.pm/nerves/advanced-configuration.html for details.
@@ -18,7 +29,7 @@ config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
 # Set the SOURCE_DATE_EPOCH date for reproducible builds.
 # See https://reproducible-builds.org/docs/source-date-epoch/ for more information
 
-config :nerves, source_date_epoch: "1589754594"
+config :nerves, source_date_epoch: "1663630688"
 
 # Use Ringlogger as the logger backend and remove :console.
 # See https://hexdocs.pm/ring_logger/readme.html for more information on
@@ -26,20 +37,8 @@ config :nerves, source_date_epoch: "1589754594"
 
 config :logger, backends: [RingLogger]
 
-config :craftbeer_ui, CraftbeerUiWeb.Endpoint,
-  code_reloader: false,
-  http: [port: 80],
-  load_from_system_env: false,
-  server: true,
-  url: [host: "nerves.local", port: 80]
-
-config :nerves_network,
-  regulatory_domain: "US"
-
-  
-config :nerves, :firmware,
-fwup_conf: "config/rpi/fwup.conf"
-
-if Mix.target() != :host do
+if Mix.target() == :host do
+  import_config "host.exs"
+else
   import_config "target.exs"
 end
