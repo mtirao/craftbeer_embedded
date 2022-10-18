@@ -9,13 +9,9 @@ defmodule CraftbeerApiWeb.GpioController do
 
   def create(conn, %{"channel" => gpio_params}) do
 
-    %{channel: channel} = gpio_params
 
-    {:ok, gpio} = Circuits.GPIO.open(channel, :output)
-    Circuits.GPIO.write(gpio, 1)
+    celsius = GenServer.cast(CraftbeerFirmware.Gpio, {:gpio, gpio_params})
 
-    Circuits.GPIO.close(gpio)
-
-    render(conn, "gpio.json", %{gpio: "ok"})
+    render(conn, "gpio.json", %{gpio: :ok})
   end
 end

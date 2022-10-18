@@ -16,8 +16,8 @@ defmodule CraftbeerFirmware.Application do
         networks: [
           %{
             key_mgmt: :wpa_psk,
-            psk: "0049252584",
-            ssid: "Fibertel WiFi834 2.4GHz_EXT"
+            psk: "2fV8tY1d",
+            ssid: "DIRECTVNET_5G_63516B"
           }
         ]
       },
@@ -40,7 +40,11 @@ defmodule CraftbeerFirmware.Application do
        %{
          id: CraftbeerFirmware.TemperatureReader,
          start: {CraftbeerFirmware.TemperatureReader, :start_link, [[:hello, :world]]}
-       }
+       },
+       %{
+        id: CraftbeerFirmware.Gpio,
+        start: {CraftbeerFirmware.Gpio, :start_link, [[:hello, :world]]}
+      }
       ] ++ children(target())
 
     Supervisor.start_link(children, opts)
